@@ -21,6 +21,10 @@ app.use(
   })
 );
 
+// Allow preflight across all routes
+app.options("*", cors());
+
+
 
 app.use(express.json());
 
