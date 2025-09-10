@@ -15,7 +15,7 @@ app.use(
   cors({
     origin: [
     "http://localhost:5173",
-    "https://skillsync-job.netlify.app/"
+    "https://skillsync-job.netlify.app"
   ], 
     credentials: true,
   })
