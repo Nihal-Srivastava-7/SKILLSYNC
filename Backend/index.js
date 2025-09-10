@@ -42,8 +42,8 @@ mongoose
   .then(async () => {
     console.log("MongoDB Connected");
 
-    app.listen(process.env.PORT, () => {
-       console.log(`✅ Server running on port ${PORT}`);
+   app.listen(PORT, () => {
+      console.log(`✅ Server running on port ${PORT}`);
     });
   })
   .catch((err) => {
