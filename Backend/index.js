@@ -13,19 +13,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",          // local frontend
-      "https://skillsync-job.netlify.app", // deployed frontend
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: "http://localhost:5173", // Vite default port
     credentials: true,
   })
 );
-
-// Preflight support 
-
-
 
 app.use(express.json());
 
@@ -43,9 +34,7 @@ mongoose
   .then(async () => {
     console.log("MongoDB Connected");
 
-   app.listen(PORT, () => {
-      console.log(`✅ Server running on port ${PORT}`);
-    });
+    app.listen(process.env.PORT, () => {});
   })
   .catch((err) => {
     console.error("MongoDB Connection Error:", err.message);
