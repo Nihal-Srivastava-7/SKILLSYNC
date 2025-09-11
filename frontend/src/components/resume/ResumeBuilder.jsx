@@ -701,7 +701,7 @@ export default function ResumeBuilder() {
           {/* Skills */}
           <div className="mb-6">
             <h2 className="text-xl font-semibold text-blue-900 mb-4">Skills</h2>
-            <div className="flex gap-2">
+            <div className="flex-col gap-3">
               <input
                 type="text"
                 value={skillsInput}
