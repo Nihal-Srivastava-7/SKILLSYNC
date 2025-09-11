@@ -494,7 +494,7 @@ export default function ResumeBuilder() {
   if (!resume) return null;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8 overflow-x-hidden">
       {/* notice */}
       {notice && (
         <div
@@ -556,9 +556,9 @@ export default function ResumeBuilder() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {/* left: forms */}
-        <section className="bg-white rounded-xl shadow-sm border p-2.5 sm:p-5">
+        <section className="bg-white rounded-xl shadow-sm border p-3 sm:p-5 text-sm sm:text-base">
           {/* Personal Info */}
           <div className="mb-6">
             <h2 className="text-xl font-semibold text-blue-900 mb-4">
@@ -969,7 +969,7 @@ export default function ResumeBuilder() {
 
         {/* right: preview */}
         <section
-          className="bg-white rounded-xl shadow-sm border p-2.5 sm:p-5"
+          className="bg-white rounded-xl shadow-sm border p-3 sm:p-5 text-sm sm:text-base overflow-x-auto"
           id="resume-preview"
         >
           <h3 className="text-xl font-semibold text-blue-900 mb-3">Preview</h3>
