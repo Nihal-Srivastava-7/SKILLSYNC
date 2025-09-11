@@ -13,7 +13,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Vite default port
+   origin: [
+      "http://localhost:5173",             // local dev
+      "https://skillsync-job.netlify.app"  // deployed frontend
+    ],
     credentials: true,
   })
 );
