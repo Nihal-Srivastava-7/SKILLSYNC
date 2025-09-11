@@ -699,7 +699,7 @@ export default function ResumeBuilder() {
           </div>
 
           {/* Skills */}
-          <div className="mb-6">
+        <div className="mb-6">
   <h2 className="text-xl font-semibold text-blue-900 mb-4">Skills</h2>
   <div className="flex flex-col space-y-3">
     <input
@@ -716,7 +716,8 @@ export default function ResumeBuilder() {
       Save Skills
     </button>
   </div>
-</div>
+
+
 
             <div className="mt-4">
               {resume.skills?.length > 0 && (
