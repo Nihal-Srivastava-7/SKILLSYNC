@@ -700,22 +700,24 @@ export default function ResumeBuilder() {
 
           {/* Skills */}
           <div className="mb-6">
-            <h2 className="text-xl font-semibold text-blue-900 mb-4">Skills</h2>
-            <div className="flex-col gap-3">
-              <input
-                type="text"
-                value={skillsInput}
-                onChange={(e) => setSkillsInput(e.target.value)}
-                className="flex-1 border rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-400"
-                placeholder="Comma separated (React, Node, MongoDB)"
-              />
-              <button
-                onClick={handleSetSkills}
-                className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
-              >
-                Save Skills
-              </button>
-            </div>
+  <h2 className="text-xl font-semibold text-blue-900 mb-4">Skills</h2>
+  <div className="flex flex-col space-y-3">
+    <input
+      type="text"
+      value={skillsInput}
+      onChange={(e) => setSkillsInput(e.target.value)}
+      className="w-full border rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-400"
+      placeholder="Comma separated (React, Node, MongoDB)"
+    />
+    <button
+      onClick={handleSetSkills}
+      className="w-full sm:w-auto px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
+    >
+      Save Skills
+    </button>
+  </div>
+</div>
+
             <div className="mt-4">
               {resume.skills?.length > 0 && (
                 <div className="flex flex-wrap gap-2">
