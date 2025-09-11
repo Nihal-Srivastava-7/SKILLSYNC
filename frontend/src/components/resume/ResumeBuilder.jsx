@@ -558,7 +558,7 @@ export default function ResumeBuilder() {
 
       <div className="grid md:grid-cols-2 gap-6">
         {/* left: forms */}
-        <section className="bg-white rounded-xl shadow-sm border p-5">
+        <section className="bg-white rounded-xl shadow-sm border p-2.5 sm:p-5">
           {/* Personal Info */}
           <div className="mb-6">
             <h2 className="text-xl font-semibold text-blue-900 mb-4">
@@ -969,7 +969,7 @@ export default function ResumeBuilder() {
 
         {/* right: preview */}
         <section
-          className="bg-white rounded-xl shadow-sm border p-5"
+          className="bg-white rounded-xl shadow-sm border p-2.5 sm:p-5"
           id="resume-preview"
         >
           <h3 className="text-xl font-semibold text-blue-900 mb-3">Preview</h3>
