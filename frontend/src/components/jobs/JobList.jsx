@@ -282,29 +282,41 @@ export default function JobList({ skills: propSkills = [] }) {
           </div>
         </div>
 
-        <form onSubmit={handleSearch} className="flex gap-2">
-          <input
-            type="search"
-            placeholder="Search title, company, location or skill..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="border rounded px-3 py-2 text-sm w-60"
-            aria-label="Search jobs"
-          />
-          <button
-            type="submit"
-            className="px-3 py-2 rounded bg-sky-500 text-white"
-          >
-            Search
-          </button>
-          <button
-            type="button"
-            onClick={handleReset}
-            className="px-3 py-2 rounded bg-gray-200"
-          >
-            Reset
-          </button>
-        </form>
+       <form
+  onSubmit={handleSearch}
+  className="flex flex-col sm:flex-row sm:items-center gap-2 w-full"
+>
+  {/* Search input: full width on mobile, flexible on larger screens */}
+  <input
+    type="search"
+    placeholder="Search title, company, location or skill..."
+    value={query}
+    onChange={(e) => setQuery(e.target.value)}
+    aria-label="Search jobs"
+    className="border rounded px-3 py-2 text-sm w-full sm:flex-1 min-w-0"
+  />
+
+  {/* Buttons group: stacked on mobile, inline on larger screens */}
+  <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+    <button
+      type="submit"
+      className="w-full sm:w-auto px-3 py-2 rounded bg-sky-500 text-white"
+      aria-label="Search"
+    >
+      Search
+    </button>
+
+    <button
+      type="button"
+      onClick={handleReset}
+      className="w-full sm:w-auto px-3 py-2 rounded bg-gray-200"
+      aria-label="Reset search"
+    >
+      Reset
+    </button>
+  </div>
+</form>
+
       </div>
 
       {error && (
@@ -371,52 +383,95 @@ export default function JobList({ skills: propSkills = [] }) {
       )}
 
       {/* Pagination */}
-      <div className="mt-6 flex items-center justify-center gap-2">
-        <button
-          onClick={() => {
-            const next = Math.max(1, currentPage - 1);
-            setCurrentPage(next);
-            if (serverMode) fetchJobs(next);
-          }}
-          disabled={currentPage === 1}
-          className="px-3 py-1 bg-gray-100 rounded disabled:opacity-50"
-        >
-          Prev
-        </button>
+     {/* Pagination */}
+<div className="mt-6">
+  {/* Desktop & tablet: full pagination (hidden on xs) */}
+  <div className="hidden sm:flex items-center justify-center gap-1 whitespace-nowrap">
+    <button
+      onClick={() => {
+        const next = Math.max(1, currentPage - 1);
+        setCurrentPage(next);
+        if (serverMode) fetchJobs(next);
+      }}
+      disabled={currentPage === 1}
+      className="text-xs px-2 py-1 bg-gray-100 rounded disabled:opacity-50"
+      aria-label="Previous page"
+    >
+      Prev
+    </button>
 
-        {computePagesToShow().map((p) => (
-          <button
-            key={p}
-            onClick={() => {
-              setCurrentPage(p);
-              if (serverMode) fetchJobs(p);
-            }}
-            className={`px-3 py-1 rounded ${
-              p === currentPage ? "bg-[#1E3A8A] text-white" : "bg-gray-100"
-            }`}
-          >
-            {p}
-          </button>
-        ))}
+    {computePagesToShow().map((p) => (
+      <button
+        key={p}
+        onClick={() => {
+          setCurrentPage(p);
+          if (serverMode) fetchJobs(p);
+        }}
+        className={`text-xs px-2 py-1 rounded ${
+          p === currentPage ? "bg-[#1E3A8A] text-white" : "bg-gray-100"
+        }`}
+        aria-current={p === currentPage ? "page" : undefined}
+        aria-label={`Go to page ${p}`}
+      >
+        {p}
+      </button>
+    ))}
 
-        <button
-          onClick={() => {
-            const next = Math.min(totalPages, currentPage + 1);
-            setCurrentPage(next);
-            if (serverMode) fetchJobs(next);
-          }}
-          disabled={currentPage === totalPages}
-          className="px-3 py-1 bg-gray-100 rounded disabled:opacity-50"
-        >
-          Next
-        </button>
-      </div>
+    <button
+      onClick={() => {
+        const next = Math.min(totalPages, currentPage + 1);
+        setCurrentPage(next);
+        if (serverMode) fetchJobs(next);
+      }}
+      disabled={currentPage === totalPages}
+      className="text-xs px-2 py-1 bg-gray-100 rounded disabled:opacity-50"
+      aria-label="Next page"
+    >
+      Next
+    </button>
+  </div>
 
-      <div className="mt-3 text-center text-sm text-gray-500">
-        {serverMode
-          ? `Showing page ${currentPage} of ${totalPages} — ${totalCount} jobs`
-          : `Showing ${displayJobs.length} jobs`}
-      </div>
+  {/* Mobile: compact pagination (visible on xs only) */}
+  <div className="flex sm:hidden items-center justify-between gap-2 px-2">
+    <button
+      onClick={() => {
+        const next = Math.max(1, currentPage - 1);
+        setCurrentPage(next);
+        if (serverMode) fetchJobs(next);
+      }}
+      disabled={currentPage === 1}
+      className="flex-1 text-xs px-2 py-2 bg-gray-100 rounded disabled:opacity-50"
+      aria-label="Previous page"
+    >
+      Prev
+    </button>
+
+    <div className="text-center text-xs text-gray-500 min-w-[90px]">
+      {serverMode ? `Page ${currentPage} / ${totalPages}` : `Page ${currentPage}`}
+    </div>
+
+    <button
+      onClick={() => {
+        const next = Math.min(totalPages, currentPage + 1);
+        setCurrentPage(next);
+        if (serverMode) fetchJobs(next);
+      }}
+      disabled={currentPage === totalPages}
+      className="flex-1 text-xs px-2 py-2 bg-gray-100 rounded disabled:opacity-50"
+      aria-label="Next page"
+    >
+      Next
+    </button>
+  </div>
+</div>
+
+{/* total count info */}
+<div className="mt-3 text-center text-sm text-gray-500">
+  {serverMode
+    ? `Showing page ${currentPage} of ${totalPages} — ${totalCount} jobs`
+    : `Showing ${displayJobs.length} jobs`}
+</div>
+
     </div>
   );
 }
